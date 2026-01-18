@@ -13,13 +13,24 @@ public abstract class AbstractUser implements UserInterface{
     protected Integer id_number; //only for employees
 
     /*METHODS*/
+    public AbstractUser(String full_name, String birth_date, String email, String address){
+        this.full_name = full_name;
+        this.birth_date = birth_date;
+        this.email = email;
+        this.address = address;
+        this.encrypted_login = Utils.encrypt(full_name);
+        this.encrypted_password = (birth_date + address + Utils.getRandomKey());
+    }
+
     public String getLogin(){
         return Utils.decrypt(this.encrypted_login);
     }
 
+
     public String getPassword(){
         return Utils.decrypt(this.encrypted_password);
     }
+
 
     public String getFullName(){return this.full_name;}
 
